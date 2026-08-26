@@ -19,38 +19,6 @@ param_nombre = st.sidebar.text_input("2. Nombre de quien legaliza:", value="Yose
 param_ciudad = st.sidebar.text_input("3. Ciudad destino (Abv.):", value="Bog")
 param_fechas = st.sidebar.text_input("4. Rango de fechas del viaje:", value="12 may a 16 mayo 26")
 
-# --- MATRICES DE HOMOLOGACIÓN OFICIALES (Centros de Costo) ---
-MAPEO_CENTROS = {
-    "c jardín": '{"125":100.0}', "c jardin": '{"125":100.0}', "pereira": '{"108":100.0}', "armenia": '{"106":100.0}',
-    "cañaveral": '{"131":100.0}', "cabecera": '{"130":100.0}', "bocagrande": '{"116":100.0}',
-    "manga": '{"118":100.0}', "mar del norte": '{"119":100.0}', "villa de andalucia": '{"114":100.0}',
-    "el poblado": '{"111":100.0}', "el prado": '{"112":100.0}', "las colinas": '{"113":100.0}',
-    "la castellana": '{"117":100.0}', "alameda": '{"121":100.0}', "bavaria sm": '{"123":100.0}',
-    "rodadero": '{"155":100.0}', "valledupar": '{"156":100.0}', "niza": '{"88":100.0}',
-    "suba turingia": '{"94":100.0}', "colina": '{"103":100.0}', "iserra 100": '{"85":100.0}',
-    "engativa occidental": '{"82":100.0}', "granada norte": '{"84":100.0}', "titan": '{"95":100.0}',
-    "verbenal": '{"97":100.0}', "chilacos": '{"102":100.0}', "americas": '{"90":100.0}',
-    "barrancas": '{"98":100.0}', "cedritos": '{"99":100.0}', "comuneros": '{"104":100.0}',
-    "country": '{"80":100.0}', "esperanza": '{"83":100.0}', "modelia": '{"87":100.0}',
-    "palermo": '{"89":100.0}', "parque bavaria": '{"91":100.0}', "chapinero": '{"100":100.0}',
-    "la cabaña": '{"86":100.0}', "usaquen": '{"96":100.0}', "quinta camacho": '{"92":100.0}',
-    "el lago": '{"81":100.0}', "chico": '{"101":100.0}', "san patricio": '{"190":100.0}',
-    "prado veraniego": '{"190":100.0}', "gran limonar": '{"126":100.0}', "parque del perro": '{"127":100.0}',
-    "san vicente": '{"128":100.0}', "manila": '{"78":100.0}', "tesoro": '{"70":100.0}',
-    "envigado alto": '{"71":100.0}', "envigado bajo": '{"72":100.0}', "la estrella": '{"73":100.0}',
-    "la frontera": '{"74":100.0}', "la mota": '{"75":100.0}', "la playa boston": '{"76":100.0}',
-    "laureles": '{"77":100.0}', "sabaneta": '{"69":100.0}', "villavicencio": '{"109":100.0}',
-    "ibague": '{"107":100.0}', "cucuta": '{"188":100.0}', "manizales": '{"191":100.0}',
-    "administracion barranquilla lum": '{"110":100.0}', "administracion bogota lum": '{"79":100.0}',
-    "administracion bucaramanga lum": '{"129":100.0}', "administracion cali lum": '{"124":100.0}',
-    "administracion cartagena lum": '{"115":100.0}', "administracion eje cafetero lum": '{"105":100.0}',
-    "administracion medellin lum": '{"68":100.0}', "administracion monteria lum": '{"120":100.0}',
-    "administracion santa marta lum": '{"122":100.0}',
-    "compostela": "No cargar", "hipotecho": "No cargar", "santa coloma": "No cargar",
-    "engativa services": "No cargar", "kennedy": "No cargar", "suba services": "No cargar",
-    "itagui": "No cargar", "la america": "No cargar", "manrique": "No cargar"
-}
-
 def normalizar_texto(texto):
     if not texto:
         return ""
@@ -64,6 +32,90 @@ def normalizar_texto(texto):
     texto = re.sub(r'[^a-z0-9]', ' ', texto)
     texto = re.sub(r'\s+', ' ', texto)
     return texto.strip()
+
+# --- MATRICES DE HOMOLOGACIÓN OFICIALES (IDs ODOO Actualizados) ---
+MAPEO_CENTROS = {
+    "administracion barranquilla lum": '{"110":100.0}',
+    "el poblado": '{"111":100.0}',
+    "el prado": '{"112":100.0}',
+    "las colinas": '{"113":100.0}',
+    "villa de andalucia": '{"114":100.0}',
+    "administracion bogota lum": '{"79":100.0}',
+    "americas": '{"90":100.0}',
+    "barrancas": '{"98":100.0}',
+    "cedritos": '{"99":100.0}',
+    "chapinero": '{"100":100.0}',
+    "chico": '{"101":100.0}',
+    "chilacos": '{"102":100.0}',
+    "colina": '{"103":100.0}',
+    "comuneros": '{"104":100.0}',
+    "country": '{"80":100.0}',
+    "el lago": '{"81":100.0}',
+    "engativa occidental": '{"82":100.0}',
+    "esperanza": '{"83":100.0}',
+    "granada norte": '{"84":100.0}',
+    "iserra 100": '{"85":100.0}',
+    "la cabana": '{"86":100.0}',
+    "modelia": '{"87":100.0}',
+    "niza": '{"88":100.0}',
+    "palermo": '{"89":100.0}',
+    "parque bavaria": '{"91":100.0}',
+    "quinta camacho": '{"92":100.0}',
+    "san patricio": '{"93":100.0}',       # Corregido: ID 93
+    "suba turingia": '{"94":100.0}',
+    "titan": '{"95":100.0}',
+    "usaquen": '{"96":100.0}',
+    "verbenal": '{"97":100.0}',
+    "prado veraniego": '{"190":100.0}',   # Confirmado: ID 190
+    "administracion bucaramanga lum": '{"129":100.0}',
+    "cabecera": '{"130":100.0}',
+    "canaveral": '{"131":100.0}',
+    "administracion cali lum": '{"124":100.0}',
+    "c jardin": '{"125":100.0}',
+    "gran limonar": '{"126":100.0}',
+    "parque del perro": '{"127":100.0}',
+    "san vicente": '{"128":100.0}',
+    "administracion cartagena lum": '{"115":100.0}',
+    "bocagrande": '{"116":100.0}',
+    "la castellana": '{"117":100.0}',
+    "manga": '{"118":100.0}',
+    "mar del norte": '{"119":100.0}',
+    "administracion eje cafetero lum": '{"105":100.0}',
+    "armenia": '{"106":100.0}',
+    "ibague": '{"107":100.0}',
+    "pereira": '{"108":100.0}',
+    "villavicencio": '{"109":100.0}',
+    "administracion medellin lum": '{"68":100.0}',
+    "envigado alto": '{"71":100.0}',
+    "envigado bajo": '{"72":100.0}',
+    "la estrella": '{"73":100.0}',
+    "la frontera": '{"74":100.0}',
+    "la mota": '{"75":100.0}',
+    "la playa boston": '{"76":100.0}',
+    "laureles": '{"77":100.0}',
+    "manila": '{"78":100.0}',
+    "sabaneta": '{"69":100.0}',
+    "tesoro": '{"70":100.0}',
+    "administracion monteria lum": '{"120":100.0}',
+    "alameda": '{"121":100.0}',
+    "administracion santa marta lum": '{"122":100.0}',
+    "bavaria sm": '{"123":100.0}',
+    "rodadero": '{"155":100.0}',
+    "valledupar": '{"156":100.0}',
+    "cucuta": '{"188":100.0}',
+    "manizales": '{"191":100.0}',
+    
+    # Centros excluidos explícitamente
+    "compostela": "No cargar", 
+    "hipotecho": "No cargar", 
+    "santa coloma": "No cargar",
+    "engativa services": "No cargar", 
+    "kennedy": "No cargar", 
+    "suba services": "No cargar",
+    "itagui": "No cargar", 
+    "la america": "No cargar", 
+    "manrique": "No cargar"
+}
 
 # --- INTERFAZ DE CARGA ---
 archivo_subido = st.file_uploader("📥 Cargar archivo de gastos LUM (Excel)", type=["xlsx", "xlsm"])
@@ -89,17 +141,26 @@ if archivo_subido is not None:
             concepto_gasto = str(row[1]).strip() if not pd.isna(row[1]) else ""
             tipo_compra = str(row[2]).strip().lower() if not pd.isna(row[2]) else ""
             tercero = str(row[3]).strip() if not pd.isna(row[3]) else ""
-            centro_costo = str(row[4]).strip().lower() if not pd.isna(row[4]) else ""
+            centro_costo = str(row[4]).strip() if not pd.isna(row[4]) else ""
             linea_presupuesto = str(row[5]).strip() if not pd.isna(row[5]) else ""
             valor_antes_iva = row[6] if not pd.isna(row[6]) else 0
-            iva = float(row[7]) if not pd.isna(row[7]) else 0.0
+            
+            try:
+                iva = float(row[7]) if not pd.isna(row[7]) else 0.0
+            except ValueError:
+                iva = 0.0
+                
             numero_factura = str(row[9]).strip() if not pd.isna(row[9]) else ""
             tipo = str(row[10]).strip().lower() if not pd.isna(row[10]) else ""
             
             etiqueta_final = f"{param_tipo_leg} {concepto_gasto}, {param_nombre} {param_ciudad} {param_fechas}"
             
-            dist_analitica = MAPEO_CENTROS.get(centro_costo.lower().strip(), None)
-            if dist_analitica == "No cargar":
+            # Búsqueda normalizada del Centro de Costo
+            cc_normalizado = normalizar_texto(centro_costo)
+            dist_analitica = MAPEO_CENTROS.get(cc_normalizado, None)
+            
+            is_no_cargar = dist_analitica == "No cargar"
+            if is_no_cargar:
                 dist_analitica = None
                 
             if "compras" in tipo_compra and iva > 0:
@@ -110,11 +171,11 @@ if archivo_subido is not None:
                 impuesto = None
 
             txt_buscar = normalizar_texto(linea_presupuesto)
-            cc_buscar = normalizar_texto(centro_costo)
+            cc_buscar = cc_normalizado
             cuenta = None
             producto = None
             
-            # --- NUEVA LÓGICA DE DETECCIÓN JERÁRQUICA TOTALMENTE FIABLE ---
+            # Detección Jerárquica de Cuentas / Productos
             if "proyecto" in txt_buscar or "74" in cc_buscar:
                 es_proyecto = True
                 es_costo = False
@@ -125,11 +186,9 @@ if archivo_subido is not None:
                 es_proyecto = False
                 es_costo = True
             else:
-                # Regla de respaldo por Centro de Costo
                 es_proyecto = False
                 es_costo = "73" in cc_buscar or "72" in cc_buscar or any(suc in cc_buscar for suc in ["jardin", "pereira", "armenia", "bucaramanga", "poblado", "medellin", "cali", "cartagena", "bogota"])
 
-            # Rama de Proyectos
             if es_proyecto:
                 if "litog" in txt_buscar or "volant" in txt_buscar or "pendon" in txt_buscar or "rappi" in txt_buscar or "insumos" in txt_buscar:
                     producto, cuenta = "74053001 INSUMOS (LITOGRAFIA, VOLANTES, PENDONES Y ACTIVIDADES COMERCIALES RAPPI)", "74053001"
@@ -148,8 +207,6 @@ if archivo_subido is not None:
                 elif "aseo" in txt_buscar or "vigil" in txt_buscar: producto, cuenta = "(PROYECTOS) SERVICIOS ASEO Y VIGILANCIA", "74350501"
                 elif "transp" in txt_buscar or "carga" in txt_buscar: producto, cuenta = "(PROYECTOS) TRANSPORTE CARGA (MERCANCIA ACARREOS)", "74355001"
                 elif "viatic" in txt_buscar or "pasaj" in txt_buscar: producto, cuenta = "(PROYECTOS) VIATICOS PASAJES", "74551501"
-            
-            # Ramas Estándar (Administración o Costos Operacionales)
             else:
                 if "contin" in txt_buscar: 
                     producto, cuenta = ("Adm-Servicios Planes de internet contingencias", "51353502") if not es_costo else ("Cost-Servicios Planes de internet contingencias", "73353502")
@@ -197,7 +254,7 @@ if archivo_subido is not None:
                 elif "calid" in txt_buscar:
                     producto, cuenta = ("Adm-Calidad", "51109502") if not es_costo else ("Cost-Calidad", "73109502")
                 elif "indemn" in txt_buscar or "indemin" in txt_buscar:
-                    producto, cuenta = ("Cost-Indeminizaciones", "73957501")
+                    producto, cuenta = ("Cost-Indemnizaciones", "73957501")
                 elif "cumple" in txt_buscar or "bono" in txt_buscar: 
                     producto, cuenta = ("Adm-Bonos Cumpleaños", "51970506")
                 elif "cumplim" in txt_buscar:
@@ -290,8 +347,7 @@ if archivo_subido is not None:
                 contacto_val = tercero if tercero != "" else "TERCERO REQUERIDO"
                 terminos_pago_val = "Pago inmediato"
                 diario_val = "Documento Soporte Electrónico" if "soporte" in tipo else "Factura Caja Menor - Tarjetas Credito - Legalizaciones"
-                dist_temporal = MAPEO_CENTROS.get(centro_costo.lower().strip(), "")
-                cufe_val = "CONTRAPARTIDA MANUAL" if dist_temporal == "No cargar" else "PONER MANUAL"
+                cufe_val = "CONTRAPARTIDA MANUAL" if is_no_cargar else "PONER MANUAL"
                 referencia_val = numero_factura if numero_factura != "" and numero_factura != "-" else "S/N"
 
             ultimo_nro_factura = numero_factura
