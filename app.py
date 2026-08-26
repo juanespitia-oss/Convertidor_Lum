@@ -33,7 +33,7 @@ def normalizar_texto(texto):
     texto = re.sub(r'\s+', ' ', texto)
     return texto.strip()
 
-# --- MATRICES DE HOMOLOGACIÓN OFICIALES (IDs ODOO Actualizados) ---
+# --- MATRICES DE HOMOLOGACIÓN OFICIALES (IDs ODOO) ---
 MAPEO_CENTROS = {
     "administracion barranquilla lum": '{"110":100.0}',
     "el poblado": '{"111":100.0}',
@@ -61,12 +61,12 @@ MAPEO_CENTROS = {
     "palermo": '{"89":100.0}',
     "parque bavaria": '{"91":100.0}',
     "quinta camacho": '{"92":100.0}',
-    "san patricio": '{"93":100.0}',       # Corregido: ID 93
+    "san patricio": '{"93":100.0}',
     "suba turingia": '{"94":100.0}',
     "titan": '{"95":100.0}',
     "usaquen": '{"96":100.0}',
     "verbenal": '{"97":100.0}',
-    "prado veraniego": '{"190":100.0}',   # Confirmado: ID 190
+    "prado veraniego": '{"190":100.0}',
     "administracion bucaramanga lum": '{"129":100.0}',
     "cabecera": '{"130":100.0}',
     "canaveral": '{"131":100.0}',
@@ -105,7 +105,7 @@ MAPEO_CENTROS = {
     "cucuta": '{"188":100.0}',
     "manizales": '{"191":100.0}',
     
-    # Centros excluidos explícitamente
+    # Excluidos
     "compostela": "No cargar", 
     "hipotecho": "No cargar", 
     "santa coloma": "No cargar",
@@ -155,7 +155,6 @@ if archivo_subido is not None:
             
             etiqueta_final = f"{param_tipo_leg} {concepto_gasto}, {param_nombre} {param_ciudad} {param_fechas}"
             
-            # Búsqueda normalizada del Centro de Costo
             cc_normalizado = normalizar_texto(centro_costo)
             dist_analitica = MAPEO_CENTROS.get(cc_normalizado, None)
             
@@ -175,7 +174,7 @@ if archivo_subido is not None:
             cuenta = None
             producto = None
             
-            # Detección Jerárquica de Cuentas / Productos
+            # Identificación Jerárquica
             if "proyecto" in txt_buscar or "74" in cc_buscar:
                 es_proyecto = True
                 es_costo = False
@@ -272,7 +271,7 @@ if archivo_subido is not None:
                 elif "aseo" in txt_buscar or "vigil" in txt_buscar:
                     producto, cuenta = ("Adm-Servicios Aseo y Vigilancia", "51350501") if not es_costo else ("Cost-Servicios Aseo y Vigilancia", "73350501")
                 elif "element" in txt_buscar or "cafet" in txt_buscar:
-                    producto, cuenta = ("Adm-Insumos: Elementos de aseo y cafetería (oficina y Bodega)", "51952501")
+                    producto, cuenta = ("Adm-Insumos: Elementos de aseo y cafetería (oficina y Bodega)", "51952501") if not es_costo else ("Cost- Insumos de aseo y cafeteria", "73952501") # AJUSTADO A CUENTA 73952501
                 elif "envas" in txt_buscar or "empaq" in txt_buscar:
                     producto, cuenta = ("Adm-Insumos: Envases y empaques (bolsas, cajas,contendores, empaques, canecas)", "51954001")
                 elif "estib" in txt_buscar:
@@ -290,7 +289,7 @@ if archivo_subido is not None:
                 elif "manten" in txt_buscar and "equip" in txt_buscar:
                     producto, cuenta = ("Adm-Mantenimiento de equipos (comunicación, computacion, camaras, extintores, emergencia) Mantenimiento redes (acueducto, Gas Natural, red internet)", "51452501") if not es_costo else ("Cost-Mantenimiento de equipos (comunicación, computacion, camaras, extintores, emergencia) Mantenimiento redes (acueducto, Gas Natural, red internet)", "73451002")
                 elif "manten" in txt_buscar and "edific" in txt_buscar:
-                    producto, cuenta = ("Adm-Mantenimiento edificio (Fachadas, pisos, paredes, techos, jardineria)", "51451001") if not es_costo else ("Cost-Mantenimiento edificio (Fachadas, pisos, paredes, techos, jardineria)", "73451001")
+                    producto, cuenta = ("Adm-Mantenimiento edificio (Fachadas, pisos, paredes, techos, jardineria)", "51451001") if not es_costo else ("Cost- Mantenimiento de edificios", "73451001") # AJUSTADO A CUENTA 73451001
                 elif "manten" in txt_buscar and "muebl" in txt_buscar:
                     producto, cuenta = ("Adm-Mantenimiento muebles office", "51453001") if not es_costo else ("Cost-Mantenimiento muebles oficina", "73453001")
                 elif "manten" in txt_buscar and "maquin" in txt_buscar:
